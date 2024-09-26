@@ -1,0 +1,116 @@
+body {
+    background-color: #260A30;
+    color: #021D38;
+    font-size: 20px;
+    font-family: poppinslight;
+}
+
+section {
+    padding: 30px;
+    background-color: #FEF5E9;
+    color: #0C1428;
+    text-align: left;
+    align-items: center;
+    font-size: 18px;
+}
+
+.criar h2{
+    text-align: center;
+    font-size: 25px;
+}
+
+  .form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 100px;
+}
+
+.pergunta {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.pergunta h3 {
+    margin: 0;
+}
+
+.remove-pergunta {
+    color: red;
+    cursor: pointer;
+    float: right;
+}
+
+.add-alternativa {
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #90BE6D;
+    color: #f5f5f5;
+    margin: 15% auto;
+    padding: 20px;
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+  .close {
+    color: #f5f5f5;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+  }

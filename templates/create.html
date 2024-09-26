@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Documento</title>
+    <link rel="stylesheet" href="/static/create.css">
+    <link rel="stylesheet" href="/static/fonts/stylesheet.css">
+</head>
+<body>
+    <section>
+        <div class="form-container">
+          <h1>Crie seu Formulário</h1>
+          <input type="text" id="titulo" placeholder="Título do Formulário (até 200 caracteres)" maxlength="200">
+          <textarea id="descricao" placeholder="Descrição do Formulário"></textarea>
+          
+          <div id="perguntas"></div>
+          <button id="adicionarPergunta">Adicionar Pergunta</button>
+          <button id="enviar">Enviar Formulário</button>
+      </div>
+      </section>
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal" class="close">&times;</span>
+          <p>Formulário enviado com sucesso!</p>
+        </div>
+      </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

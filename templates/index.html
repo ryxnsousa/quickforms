@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickForms</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/fonts/stylesheet.css">
+</head>
+<body>
+    <header>
+        <div class="tittle">
+            <h1>QuickForms</h1>
+        </div>
+
+        <ul>
+            <a href="{{ url_for('forms') }}">
+                <li>Meus Formulários</li>
+            </a>
+        </ul>
+    </header>
+
+    <main>
+        <h1>Formulários Fantásticos</h1>
+        <h3>Crie, edite e compartilhe formulários como um verdadeiro mestre</h3>
+        <button class="start">Vamos lá?</button>
+    </main>
+
+    <section id="final">
+        <div class="perguntas">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3>Como posso criar um formulário?</h3>
+                    <p>Basta clicar em 'Criar' e seguir as instruções!</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Posso editar formulários já criados?</h3>
+                    <p>Claro! É só acessar e modificar como quiser.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>É gratuito ou pago?</h3>
+                    <p>O QuickForms é totalmente gratuito, aproveite!</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Posso compartilhar meus formulários?</h3>
+                    <p>Sim! Compartilhe com um clique!</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Tem suporte ao cliente?</h3>
+                    <p>Sim, estamos aqui para ajudar você!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="começar">
+            <h1>Crie seu formulário agora!</h1>
+            <p>Transforme suas ideias em formulários incríveis em minutos!</p>
+            <a href="{{ url_for('create') }}" class="start_button">Começar Agora</a>
+        </div>
+    </section>
+
+    <script>
+        document.querySelector('.start').addEventListener('click', function() {
+            document.getElementById('final').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
