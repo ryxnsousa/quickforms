@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Formulário</title>
+    <link rel="stylesheet" href="/static/create.css">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <section>
+        <div class="form-container">
+            <h1>Editar Formulário</h1>
+            <input type="text" id="titulo" value="{{ formulario.titulo }}" placeholder="Título do Formulário (até 200 caracteres)" maxlength="200">
+            <textarea id="descricao" placeholder="Descrição do Formulário">{{ formulario.descricao }}</textarea>
+            <div id="perguntas"></div>
+            <button id="adicionarPergunta">Adicionar Pergunta</button>
+            <button id="enviar">Salvar Formulário</button>
+        </div>
+    </section>
+
+    <script>
+        const perguntas = "{{ formulario.perguntas }}".split(',').map(p => {
+            const [texto, tipo] = p.trim().split('|');
+            return { texto, tipo };
+        });
+
+        function createQuestionElement(texto = '', tipo = 'resposta-curta') {
+            const perguntaDiv = document.createElement('div');
+            perguntaDiv.classList.add('pergunta');
+
+            const perguntaTipo = document.createElement('select');
+            perguntaTipo.innerHTML = `
+                <option value="resposta-curta">Resposta Curta</option>
+                <option value="resposta-longa">Resposta Longa</option>
+                <option value="multipla-escolha">Múltipla Escolha</option>
+                <option value="caixa-selecao">Caixa de Seleção</option>
+            `;
+            perguntaTipo.value = tipo;
+
+            const perguntaLabel = document.createElement('input');
+            perguntaLabel.type = 'text';
+            perguntaLabel.placeholder = 'Nova Pergunta';
+            perguntaLabel.value = texto;
+
+            const removeButton = createRemoveButton(perguntaDiv);
+            perguntaDiv.appendChild(perguntaLabel);
+            perguntaDiv.appendChild(perguntaTipo);
+            perguntaDiv.appendChild(removeButton);
+
+            return perguntaDiv;
+        }
+
+        function loadQuestions() {
+            perguntas.forEach(({ texto, tipo }) => {
+                const perguntasContainer = document.getElementById('perguntas');
+                const perguntaDiv = createQuestionElement(texto, tipo);
+                perguntasContainer.appendChild(perguntaDiv);
+            });
+        }
+
+        function createRemoveButton(container) {
+            const button = document.createElement('span');
+            button.classList.add('remove-pergunta');
+            button.innerText = 'Remover';
+            button.style.cursor = 'pointer';
+            button.style.color = 'red';
+
+            button.addEventListener('click', () => {
+                container.remove();
+            });
+
+            return button;
+        }
+
+        document.getElementById('adicionarPergunta').addEventListener('click', () => {
+            const perguntasContainer = document.getElementById('perguntas');
+            const perguntaDiv = createQuestionElement();
+            perguntasContainer.appendChild(perguntaDiv);
+        });
+
+        window.onload = loadQuestions;
+
+        document.getElementById('enviar').addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const titulo = document.getElementById('titulo').value;
+            const descricao = document.getElementById('descricao').value;
+            const perguntas = Array.from(document.querySelectorAll('.pergunta')).map(p => {
+                return {
+                    texto: p.querySelector('input[type="text"]').value,
+                    tipo: p.querySelector('select').value
+                };
+            });
+
+            fetch(`/edit/{{ formulario.id }}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ titulo, descricao, perguntas })
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/forms';
+                } else {
+                    console.error('Erro ao salvar o formulário');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        });
+    </script>
+    
+</body>
+</html>

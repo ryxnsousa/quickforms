@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="tittle">
+        <div class="title">
             <h1>QuickForms</h1>
         </div>
 
@@ -22,9 +22,17 @@
 
     <main>
         <h2>Lista de Formulários</h2>
-
+        <div>
+            <ul>
+                {% for formulario in formularios %}
+                    <li>
+                        <strong>{{ formulario.titulo }}</strong> - {{ formulario.descricao }}
+                        <a href="{{ url_for('edit', id=formulario.id) }}">Editar</a>
+                        <a href="{{ url_for('delete', id=formulario.id) }}">Excluir</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </main>
-
 </body>
 </html>

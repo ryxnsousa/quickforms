@@ -1,10 +1,10 @@
 from settings import db
 
-class User(db.Model):
-    id = db.Collumn('id', db.Integer, primary_key=True, autoincrement=True)
-    titulo = db.Column(db.string(200))
-    desc = db.Column(db.Integer)
+class Formulario(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(200), nullable=False)
+    descricao = db.Column(db.Text, nullable=False)
+    perguntas = db.Column(db.Text, nullable=False)
 
-    def __init__(self, titulo, desc):
-        self.titulo = titulo
-        self.desc = desc
+    def __repr__(self):
+        return f'<Formulario {self.titulo}>'

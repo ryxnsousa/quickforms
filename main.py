@@ -1,20 +1,21 @@
-from flask import Flask, request, redirect
-import mysql.connector
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
 from settings import db
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://user_flask:senha1234@localhost/quickforms'
-db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db_config = {
-    'user': 'user_flask',
-    'password': 'senha1234',
-    'host': 'localhost',
-    'database': 'quickforms',
-}
+db.init_app(app)
 
-from views import *
+with app.app_context():
+    from views import * 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
+
+
+from main import app
+from models import db
+
+with app.app_context():
+    db.create_all()

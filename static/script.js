@@ -125,13 +125,16 @@ function openModal() {
   document.getElementById('enviar').addEventListener('click', (e) => {
     e.preventDefault();
     
-        console.log("Formulário enviado!");
-  
-        openModal();
-  
-        setTimeout(() => {
-      closeModal();
-      location.reload();
+    console.log("Formulário enviado!");
+    openModal();
+
+    setTimeout(() => {
+        closeModal();
+
+        const criarOutro = confirm("Deseja criar outro formulário?");
+        if (criarOutro) {
+            location.reload();
+        }
     }, 1500);
-  });
-  
+});
+
